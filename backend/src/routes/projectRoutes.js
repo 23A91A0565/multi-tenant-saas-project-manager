@@ -1,7 +1,10 @@
 import express from "express";
 import { authenticate } from "../middleware/authMiddleware.js";
 import { tenantIsolation } from "../middleware/tenantMiddleware.js";
-import { createProject, listProjects } from "../controllers/projectController.js";
+import {
+  createProject,
+  listProjects
+} from "../controllers/projectController.js";
 
 const router = express.Router();
 

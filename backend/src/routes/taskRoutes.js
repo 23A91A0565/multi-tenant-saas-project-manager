@@ -12,12 +12,12 @@ const router = express.Router();
 
 router.use(authenticate, tenantIsolation);
 
-// project-based task routes
+// project-based
 router.post("/projects/:projectId/tasks", createTask);
 router.get("/projects/:projectId/tasks", listTasks);
 
-// task-based routes
+// task-based
 router.patch("/tasks/:taskId/status", updateTaskStatus);
-router.put("/tasks/:taskId", updateTask);   // ✅ THIS WAS MISSING OR NOT LOADED
+router.put("/tasks/:taskId", updateTask);
 
 export default router;
