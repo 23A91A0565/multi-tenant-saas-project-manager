@@ -8,6 +8,7 @@ import {
 
 const router = express.Router();
 
+// 🔒 Protected
 router.use(authenticate, tenantIsolation);
 
 router.post("/", createProject);

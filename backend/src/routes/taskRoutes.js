@@ -10,6 +10,7 @@ import {
 
 const router = express.Router();
 
+// 🔒 Protected
 router.use(authenticate, tenantIsolation);
 
 // project-based
