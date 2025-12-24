@@ -35,6 +35,15 @@ function App() {
             </ProtectedRoute>
           }
         />
+	
+	<Route
+  path="/projects/:id"
+  element={
+    <ProtectedRoute>
+      <ProjectDetails />
+    </ProtectedRoute>
+  }
+/>
 
         {/* ROLE BASED */}
         <Route

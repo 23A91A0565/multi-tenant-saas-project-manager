@@ -36,11 +36,27 @@ export const addUser = async (req, res) => {
         message: "Subscription user limit reached"
       });
     }
+const countRes = await pool.query(
+  "SELECT COUNT(*) FROM users WHERE tenant_id=$1",
+  [tenantId]
+);
+
+const tenantRes = await pool.query(
+  "SELECT max_users FROM tenants WHERE id=$1",
+  [tenantId]
+);
+
+if (Number(countRes.rows[0].count) >= tenantRes.rows[0].max_users) {
+  return res.status(403).json({
+    success: false,
+    message: "User limit reached for your subscription plan"
+  });
+}
 
     // 3️⃣ Create user
     const passwordHash = await bcrypt.hash(password, 10);
     const newUserId = uuidv4();
-
+	
     await pool.query(
       `INSERT INTO users (id, tenant_id, email, password_hash, full_name, role)
        VALUES ($1,$2,$3,$4,$5,$6)`,

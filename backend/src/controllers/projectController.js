@@ -10,6 +10,23 @@ export const createProject = async (req, res) => {
   const tenantId = req.tenantId;
   const userId = req.user.userId;
 
+const countRes = await pool.query(
+  "SELECT COUNT(*) FROM projects WHERE tenant_id=$1",
+  [tenantId]
+);
+
+const tenantRes = await pool.query(
+  "SELECT max_projects FROM tenants WHERE id=$1",
+  [tenantId]
+);
+
+if (Number(countRes.rows[0].count) >= tenantRes.rows[0].max_projects) {
+  return res.status(403).json({
+    success: false,
+    message: "Project limit reached for your subscription plan"
+  });
+}
+
   try {
     const projectId = uuidv4();
 
