@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-export const authenticate = (req, res, next) => {
+export const requireAuth = (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
 
@@ -9,11 +9,18 @@ export const authenticate = (req, res, next) => {
     }
 
     const token = authHeader.split(" ")[1];
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.user = decoded; // { userId, tenantId, role }
+    req.user = {
+      userId: decoded.userId,
+      tenantId: decoded.tenantId,
+      role: decoded.role
+    };
+
     next();
   } catch (err) {
-    return res.status(401).json({ message: "Invalid or expired token" });
+    console.error("JWT ERROR:", err.message);
+    return res.status(401).json({ message: "Invalid token" });
   }
 };

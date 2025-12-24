@@ -1,5 +1,5 @@
 import express from "express";
-import { authenticate } from "../middleware/authMiddleware.js";
+import { requireAuth } from "../middleware/authMiddleware.js";
 import { tenantIsolation } from "../middleware/tenantMiddleware.js";
 import {
   createTask,
@@ -11,7 +11,7 @@ import {
 const router = express.Router();
 
 // 🔒 Protected
-router.use(authenticate, tenantIsolation);
+router.use(requireAuth, tenantIsolation);
 
 // project-based
 router.post("/projects/:projectId/tasks", createTask);

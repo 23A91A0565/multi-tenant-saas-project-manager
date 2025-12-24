@@ -1,23 +1,12 @@
 import express from "express";
 import { requireAuth } from "../middleware/authMiddleware.js";
 import { tenantIsolation } from "../middleware/tenantMiddleware.js";
-import { allowRoles } from "../middleware/roleMiddleware.js";
-import { addUser, listUsers } from "../controllers/userController.js";
+import { getDashboardStats } from "../controllers/dashboardController.js";
 
 const router = express.Router();
 
 router.use(requireAuth, tenantIsolation);
 
-router.post(
-  "/",
-  allowRoles("tenant_admin"),
-  addUser
-);
-
-router.get(
-  "/",
-  allowRoles("tenant_admin"),
-  listUsers
-);
+router.get("/stats", getDashboardStats);
 
 export default router;
