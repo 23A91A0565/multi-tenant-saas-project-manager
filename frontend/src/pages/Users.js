@@ -42,6 +42,7 @@ const Users = () => {
 
   return (
     <div>
+    
       <h2>Users</h2>
 
       {/* ADD USER */}
@@ -50,6 +51,7 @@ const Users = () => {
         <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
         <button>Add User</button>
       </form>
+
 
       {/* LIST USERS */}
       <ul>
