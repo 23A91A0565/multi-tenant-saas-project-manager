@@ -10,6 +10,7 @@ VALUES (
 );
 
 -- TENANT
+
 INSERT INTO tenants (id, name, subdomain, subscription_plan, max_users, max_projects)
 VALUES (
   '11111111-1111-1111-1111-111111111111',
