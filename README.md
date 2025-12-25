@@ -40,7 +40,7 @@ Production-ready multi-tenant SaaS platform for managing projects and tasks.
 
 docker-compose up -d
 
-
+```
 
 # Health Check
 
@@ -72,37 +72,37 @@ See submission.json
 
 {
 
-&nbsp; "testCredentials": {
+ "testCredentials": {
 
-&nbsp;   "superAdmin": {
+ "superAdmin": {
 
-&nbsp;     "email": "superadmin@system.com",
+  "email": "superadmin@system.com",
 
-&nbsp;     "password": "Admin@123",
+  "password": "Admin@123",
 
-&nbsp;     "role": "super\_admin",
+  "role": "super\_admin",
 
-&nbsp;     "tenantId": null
+  "tenantId": null
 
-&nbsp;   },
+   },
 
-&nbsp;   "tenants": \[
+"tenants": \[
 
-&nbsp;     {
+ {
 
-&nbsp;       "name": "Demo Company",
+    "name": "Demo Company",
 
-&nbsp;       "subdomain": "demo",
+    "subdomain": "demo",
 
-&nbsp;       "admin": {
+     "admin": {
 
-&nbsp;         "email": "admin@demo.com",
+       "email": "admin@demo.com",
 
-&nbsp;         "password": "Demo@123",
+       "password": "Demo@123",
 
-&nbsp;         "role": "tenant\_admin"
+       "role": "tenant\_admin"
 
-&nbsp;       },
+      },
 
 &nbsp;       "users": \[
 
