@@ -1,66 +1,33 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getProjectById, getProjectTasks } from "../api/api";
-import { createTask } from "../api/api";
-import { updateTaskStatus } from "../api/api";
-import { deleteProject } from "../api/api";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  getProjectById,
+  getProjectTasks,
+  createTask,
+  updateTaskStatus,
+  updateProject,
+  deleteProject,
+} from "../api/api";
 
 const ProjectDetails = () => {
   const { id } = useParams();
-const [title, setTitle] = useState("");
+  const navigate = useNavigate();
 
   const [project, setProject] = useState(null);
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-const [editing, setEditing] = useState(false);
-const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
+  const [editing, setEditing] = useState(false);
+  const [name, setName] = useState("");
 
-const navigate = useNavigate();
-
-const handleDeleteProject = async () => {
-  if (!window.confirm("Delete this project?")) return;
-
-  await deleteProject(id);
-  navigate("/projects");
-};
-
-const handleCreateTask = async (e) => {
-  e.preventDefault();
-
-  await createTask(id, { title });
-
-  const tasksRes = await getProjectTasks(id);
-  setTasks(tasksRes.data.data);
-
-  setTitle("");
-};
-
-const handleStatusChange = async (taskId, status) => {
-  await updateTaskStatus(taskId, status);
-
-  const tasksRes = await getProjectTasks(id);
-  setTasks(tasksRes.data.data);
-};
-
-const handleUpdateProject = async () => {
-  await updateProject(id, { name });
-
-  const res = await getProjectById(id);
-  setProject(res.data.data);
-
-  setEditing(false);
-};
-
+  // 🔹 Load project + tasks
   useEffect(() => {
-    Promise.all([
-      getProjectById(id),
-      getProjectTasks(id),
-    ])
+    Promise.all([getProjectById(id), getProjectTasks(id)])
       .then(([projectRes, tasksRes]) => {
         setProject(projectRes.data.data);
         setTasks(tasksRes.data.data);
+        setName(projectRes.data.data.name);
       })
       .catch((err) => {
         console.error("Failed to load project details", err);
@@ -68,7 +35,37 @@ const handleUpdateProject = async () => {
       .finally(() => setLoading(false));
   }, [id]);
 
-setName(projectRes.data.data.name);
+  // 🔹 Create task
+  const handleCreateTask = async (e) => {
+    e.preventDefault();
+
+    await createTask(id, { title });
+    const tasksRes = await getProjectTasks(id);
+    setTasks(tasksRes.data.data);
+    setTitle("");
+  };
+
+  // 🔹 Update task status
+  const handleStatusChange = async (taskId, status) => {
+    await updateTaskStatus(taskId, status);
+    const tasksRes = await getProjectTasks(id);
+    setTasks(tasksRes.data.data);
+  };
+
+  // 🔹 Update project
+  const handleUpdateProject = async () => {
+    await updateProject(id, { name });
+    const res = await getProjectById(id);
+    setProject(res.data.data);
+    setEditing(false);
+  };
+
+  // 🔹 Delete project
+  const handleDeleteProject = async () => {
+    if (!window.confirm("Delete this project?")) return;
+    await deleteProject(id);
+    navigate("/projects");
+  };
 
   if (loading) return <p>Loading project...</p>;
   if (!project) return <p>Project not found</p>;
@@ -90,43 +87,52 @@ setName(projectRes.data.data.name);
           {tasks.map((task) => (
             <li key={task.id}>
               <strong>{task.title}</strong> — {task.status}
+              <br />
+              <button onClick={() => handleStatusChange(task.id, "todo")}>
+                Todo
+              </button>
+              <button
+                onClick={() => handleStatusChange(task.id, "in_progress")}
+              >
+                In Progress
+              </button>
+              <button
+                onClick={() => handleStatusChange(task.id, "completed")}
+              >
+                Done
+              </button>
             </li>
           ))}
         </ul>
       )}
 
-	<form onSubmit={handleCreateTask}>
-  <input
-    placeholder="New task title"
-    value={title}
-    onChange={(e) => setTitle(e.target.value)}
-    required
-  />
-  <button type="submit">Add Task</button>
-</form>
+      <hr />
 
-<li key={task.id}>
-  <strong>{task.title}</strong> — {task.status}
+      <form onSubmit={handleCreateTask}>
+        <input
+          placeholder="New task title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+        <button type="submit">Add Task</button>
+      </form>
 
-  <button onClick={() => handleStatusChange(task.id, "todo")}>Todo</button>
-  <button onClick={() => handleStatusChange(task.id, "in_progress")}>In Progress</button>
-  <button onClick={() => handleStatusChange(task.id, "completed")}>Done</button>
-</li>
+      <hr />
 
-{editing ? (
-  <>
-    <input value={name} onChange={(e) => setName(e.target.value)} />
-    <button onClick={handleUpdateProject}>Save</button>
-  </>
-) : (
-  <>
-    <h2>{project.name}</h2>
-    <button onClick={() => setEditing(true)}>Edit</button>
-  </>
-)}
+      {editing ? (
+        <>
+          <input value={name} onChange={(e) => setName(e.target.value)} />
+          <button onClick={handleUpdateProject}>Save</button>
+        </>
+      ) : (
+        <>
+          <button onClick={() => setEditing(true)}>Edit Project</button>
+        </>
+      )}
 
-<button onClick={handleDeleteProject}>Delete Project</button>
-
+      <br />
+      <button onClick={handleDeleteProject}>Delete Project</button>
     </div>
   );
 };
