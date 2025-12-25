@@ -6,6 +6,7 @@ const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  
   useEffect(() => {
     getProjects()
       .then((res) => {
