@@ -118,11 +118,11 @@ See submission.json
 
     ]
 
-&nbsp;     }
+   }
 
-&nbsp;   ]
+  ]
 
-&nbsp; }
+ }
 
 }
 
