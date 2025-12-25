@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
+  
   const [loading, setLoading] = useState(true);
 
   
