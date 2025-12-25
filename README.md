@@ -1,4 +1,4 @@
-\# Multi-Tenant SaaS Project Manager
+# Multi-Tenant SaaS Project Manager
 
 
 
@@ -6,7 +6,7 @@ Production-ready multi-tenant SaaS platform for managing projects and tasks.
 
 
 
-\## Features
+## Features
 
 \- Multi-tenant isolation
 
