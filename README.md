@@ -50,7 +50,7 @@ http://localhost:5000/api/health
 
 
 
-#Credentials
+# Credentials
 
 
 
@@ -64,7 +64,7 @@ See submission.json
 
 
 
-## 6️⃣ `submission.json` (MANDATORY – EXACT FORMAT)
+##  `submission.json` (MANDATORY – EXACT FORMAT)
 
 
 
