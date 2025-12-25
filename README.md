@@ -20,7 +20,7 @@ Production-ready multi-tenant SaaS platform for managing projects and tasks.
 
 
 
-\## Tech Stack
+## Tech Stack
 
 \- React
 
@@ -34,7 +34,7 @@ Production-ready multi-tenant SaaS platform for managing projects and tasks.
 
 
 
-\## Setup
+## Setup
 
 ```bash
 
@@ -42,7 +42,7 @@ docker-compose up -d
 
 
 
-\# Health Check
+# Health Check
 
 
 
@@ -50,7 +50,7 @@ http://localhost:5000/api/health
 
 
 
-\#Credentials
+#Credentials
 
 
 
@@ -64,7 +64,7 @@ See submission.json
 
 
 
-\## 6️⃣ `submission.json` (MANDATORY – EXACT FORMAT)
+## 6️⃣ `submission.json` (MANDATORY – EXACT FORMAT)
 
 
 
