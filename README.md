@@ -100,7 +100,7 @@ See submission.json
 
        "password": "Demo@123",
 
-       "role": "tenant\_admin"
+       "role": "tenant_admin"
 
       },
 
