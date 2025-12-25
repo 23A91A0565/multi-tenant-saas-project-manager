@@ -28,20 +28,23 @@ const Login = () => {
         value={tenant}
         onChange={(e) => setTenant(e.target.value)}
       />
-
+      <br></br>
+          
       <input
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
 
+      <br></br>
+          
       <input
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-
+      <br></br>
       <button type="submit">Login</button>
     </form>
   );
