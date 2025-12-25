@@ -1,4 +1,4 @@
-\# Multi-Tenant SaaS Project Manager
+# Multi-Tenant SaaS Project Manager
 
 
 
@@ -6,7 +6,7 @@ Production-ready multi-tenant SaaS platform for managing projects and tasks.
 
 
 
-\## Features
+## Features
 
 \- Multi-tenant isolation
 
@@ -20,7 +20,7 @@ Production-ready multi-tenant SaaS platform for managing projects and tasks.
 
 
 
-\## Tech Stack
+## Tech Stack
 
 \- React
 
@@ -34,15 +34,15 @@ Production-ready multi-tenant SaaS platform for managing projects and tasks.
 
 
 
-\## Setup
+## Setup
 
 ```bash
 
 docker-compose up -d
 
+```
 
-
-\# Health Check
+# Health Check
 
 
 
@@ -50,7 +50,7 @@ http://localhost:5000/api/health
 
 
 
-\#Credentials
+#Credentials
 
 
 
@@ -64,7 +64,7 @@ See submission.json
 
 
 
-\## 6️⃣ `submission.json` (MANDATORY – EXACT FORMAT)
+## 6️⃣ `submission.json` (MANDATORY – EXACT FORMAT)
 
 
 
@@ -72,57 +72,57 @@ See submission.json
 
 {
 
-&nbsp; "testCredentials": {
+ "testCredentials": {
 
-&nbsp;   "superAdmin": {
+ "superAdmin": {
 
-&nbsp;     "email": "superadmin@system.com",
+  "email": "superadmin@system.com",
 
-&nbsp;     "password": "Admin@123",
+  "password": "Admin@123",
 
-&nbsp;     "role": "super\_admin",
+  "role": "super_admin",
 
-&nbsp;     "tenantId": null
+  "tenantId": null
 
-&nbsp;   },
+   },
 
-&nbsp;   "tenants": \[
+"tenants": [
 
-&nbsp;     {
+ {
 
-&nbsp;       "name": "Demo Company",
+    "name": "Demo Company",
 
-&nbsp;       "subdomain": "demo",
+    "subdomain": "demo",
 
-&nbsp;       "admin": {
+     "admin": {
 
-&nbsp;         "email": "admin@demo.com",
+       "email": "admin@demo.com",
 
-&nbsp;         "password": "Demo@123",
+       "password": "Demo@123",
 
-&nbsp;         "role": "tenant\_admin"
+       "role": "tenant_admin"
 
-&nbsp;       },
+      },
 
-&nbsp;       "users": \[
+    "users": [
 
-&nbsp;         {
+       {
 
-&nbsp;           "email": "user1@demo.com",
+        "email": "user1@demo.com",
 
-&nbsp;           "password": "User@123",
+        "password": "User@123",
 
-&nbsp;           "role": "user"
+        "role": "user"
 
-&nbsp;         }
+    }
 
-&nbsp;       ]
+    ]
 
-&nbsp;     }
+   }
 
-&nbsp;   ]
+  ]
 
-&nbsp; }
+ }
 
 }
 
