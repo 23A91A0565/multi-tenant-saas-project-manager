@@ -80,13 +80,13 @@ See submission.json
 
   "password": "Admin@123",
 
-  "role": "super\_admin",
+  "role": "super_admin",
 
   "tenantId": null
 
    },
 
-"tenants": \[
+"tenants": [
 
  {
 
@@ -104,19 +104,19 @@ See submission.json
 
       },
 
-&nbsp;       "users": \[
+    "users": [
 
-&nbsp;         {
+       {
 
-&nbsp;           "email": "user1@demo.com",
+        "email": "user1@demo.com",
 
-&nbsp;           "password": "User@123",
+        "password": "User@123",
 
-&nbsp;           "role": "user"
+        "role": "user"
 
-&nbsp;         }
+    }
 
-&nbsp;       ]
+    ]
 
 &nbsp;     }
 
