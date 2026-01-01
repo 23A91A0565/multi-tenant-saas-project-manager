@@ -261,9 +261,3 @@ Includes:
 -  Role-based authentication
 -  Tenant isolation
 
----
-
-##  License
-
-This project is for educational and evaluation purposes.
-
