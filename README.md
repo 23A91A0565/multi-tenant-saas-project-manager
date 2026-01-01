@@ -252,12 +252,3 @@ Includes:
 
 ---
 
-## Evaluation Compliance
-
-- Automatic database migrations
--  Automatic seed data
--  Docker-only setup
--  Health check implemented
--  Role-based authentication
--  Tenant isolation
-
