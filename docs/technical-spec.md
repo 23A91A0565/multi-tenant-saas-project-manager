@@ -1,32 +1,19 @@
 # Technical Specification
 
 ## Backend Structure
-
-- controllers/
-- routes/
-- middleware/
-- migrations/
-- seeds/
-- scripts/
+- controllers: API logic
+- routes: API endpoints
+- middleware: auth, roles, tenant isolation
+- services: audit logging
+- config: database and environment configuration
 
 ## Frontend Structure
+- pages
+- components
+- auth context
+- API service
 
-- api/
-- auth/
-- pages/
-- components/
-
-## Environment Variables
-
-- DB_HOST
-- DB_NAME
-- DB_USER
-- DB_PASSWORD
-- JWT_SECRET
-- FRONTEND_URL
-
-## Local Setup
-
-1. docker-compose up -d
-2. Open http://localhost:3000
-3. Login using seed credentials
+## Development Setup
+- Node.js 18+
+- PostgreSQL 15
+- Docker and Docker Compose

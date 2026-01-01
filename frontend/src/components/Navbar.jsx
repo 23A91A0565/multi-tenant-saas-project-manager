@@ -1,32 +1,105 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../auth/AuthContext";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 
-function Navbar() {
-  const { user, logout } = useAuth();
+const Navbar = () => {
+  const { authData, logout } = useContext(AuthContext);
+  const [open, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  if (!user) return null;
+  const role = authData?.user?.role;
+
+  // 🔑 Close mobile menu
+  const closeMobileMenu = () => setOpen(false);
 
   return (
-    <nav style={{ padding: "10px", borderBottom: "1px solid #ccc" }}>
-      <Link to="/dashboard">Dashboard</Link> |{" "}
-      <Link to="/projects">Projects</Link>
+    <nav className="navbar">
+      {/* ✅ Logo */}
+      <div className="logo" onClick={closeMobileMenu}>
+        Multi-Tenant SaaS
+      </div>
 
-      {user.role === "tenant_admin" && (
-        <>
-          {" | "}
-          <Link to="/users">Users</Link>
-        </>
-      )}
-
-      <span style={{ marginLeft: "20px" }}>
-        {user.email} ({user.role})
-      </span>
-
-      <button onClick={logout} style={{ marginLeft: "10px" }}>
-        Logout
+      {/* ✅ Hamburger */}
+      <button
+        className="hamburger"
+        onClick={() => setOpen(!open)}
+        aria-label="Toggle navigation"
+      >
+        ☰
       </button>
+
+      {/* ✅ Nav Links */}
+      <ul className={`nav-links ${open ? "open" : ""}`}>
+        <li>
+          <Link to="/dashboard" onClick={closeMobileMenu}>
+            Dashboard
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/projects" onClick={closeMobileMenu}>
+            Projects
+          </Link>
+        </li>
+
+        {(role === "tenant_admin" || role === "super_admin") && (
+          <li>
+            <Link to="/tasks" onClick={closeMobileMenu}>
+              Tasks
+            </Link>
+          </li>
+        )}
+
+        {role === "tenant_admin" && (
+          <li>
+            <Link to="/users" onClick={closeMobileMenu}>
+              Users
+            </Link>
+          </li>
+        )}
+
+        {role === "super_admin" && (
+          <li>
+            <Link to="/tenants" onClick={closeMobileMenu}>
+              Tenants
+            </Link>
+          </li>
+        )}
+      </ul>
+
+      {/* ✅ User Dropdown */}
+      <div
+        className="user-menu"
+        onClick={(e) => {
+          e.stopPropagation();
+          setMenuOpen(!menuOpen);
+        }}  
+      >
+        <span>
+          {authData?.user?.fullName} ({role})
+        </span>
+
+        {menuOpen && (
+          <div className="dropdown">
+            <Link to="/profile" onClick={() => setMenuOpen(false)}>
+              Profile
+            </Link>
+            <Link to="/settings" onClick={() => setMenuOpen(false)}>
+              Settings
+            </Link>
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                logout();
+              }}
+            >
+              Logout
+            </button>
+          </div>
+        )}
+      </div>
     </nav>
   );
-}
+};
 
 export default Navbar;

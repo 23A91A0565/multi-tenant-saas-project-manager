@@ -1,23 +1,21 @@
 # System Architecture
 
-## Overview
-This system follows a three-tier architecture:
+The system follows a client-server architecture.
 
-- React Frontend
-- Node.js Backend API
-- PostgreSQL Database
+Frontend:
+- React application running in browser.
 
-## Architecture Diagram
-See: docs/images/system-architecture.png
+Backend:
+- Express.js REST API.
+- JWT authentication.
+- Role-based access control.
+- Tenant isolation middleware.
 
-## Database ERD
-See: docs/images/database-erd.png
+Database:
+- PostgreSQL with shared schema.
+- tenant_id-based data isolation.
 
-## API Modules
-
-- Auth
-- Tenants
-- Users
-- Projects
-- Tasks
-- Audit Logs
+Authentication Flow:
+- User logs in
+- JWT issued
+- Token used for authenticated requests
