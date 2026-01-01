@@ -250,5 +250,3 @@ Includes:
 * Auth requirements
 * Request & response examples
 
----
-
